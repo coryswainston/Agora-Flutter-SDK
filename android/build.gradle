@@ -54,13 +54,15 @@ android {
 }
 
 dependencies {
-  if (isDev(project)) {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-  } else {
-    api 'io.agora.rtc:iris-rtc:4.2.3-build.3'
-    api 'io.agora.rtc:full-sdk:4.2.3'
-    api 'io.agora.rtc:full-screen-sharing:4.2.3'
-  }
+    if (isDev(project)) {
+        api fileTree(dir: "libs", include: ["*.jar", "*.aar"])
+    } else {
+        api 'io.agora.rtc:iris-rtc:3.7.0.3'
+    }
+
+    implementation 'io.agora.rtc:full-rtc-basic:3.7.0.3'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${safeExtGet('kotlin_version', "$agora_rtc_engine_kt_version")}"
 }
 
 static boolean isDev(Project project) {
